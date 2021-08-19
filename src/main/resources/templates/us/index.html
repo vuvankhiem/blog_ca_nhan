@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/us/fragments :: head(~{::title},~{})">
+    <title>Trang chủ</title>
+</head>
+
+
+<body>
+
+<div class="wrap">
+
+    <!--Header-->
+    <header th:replace="/us/fragments :: header"></header>
+    <!--End Header-->
+
+
+    <!--Content-->
+    <section class="site-section pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="owl-carousel owl-theme home-slider">
+                        <th:block th:each="postSile : ${postSile}">
+                            <div>
+                                <a th:href="@{/bai-viet/{id}(id=${postSile.postId})}"
+                                   class="a-block d-flex align-items-center height-lg" style=""
+                                   th:style="'background-image: url('+ ${postSile.postImage} +');'">
+
+                                    <div class="text half-to-full">
+                                        <span class="category mb-5" th:text="${postSile.category.categoryName}"></span>
+                                        <div class="post-meta">
+                                            <span class="author mr-2"><img th:src="@{${postSile.account.avatar}}"
+                                                                           alt="Colorlib">
+                                                <span th:text="${postSile.account.firstName} + ' '+${postSile.account.lastName}"></span>
+                                            </span>&bullet;
+                                            <span class="mr-2" th:text="${postSile.postDate}"></span> &bullet;
+                                            <span class="ml-2">
+                                                <span class="fa fa-eye"></span>
+                                                <span th:text="${postSile.postViews}"></span>
+                                            </span>
+                                        </div>
+                                        <h3 th:text="${postSile.postTitle}"></h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis, ut
+                                            dicta
+                                            eaque ipsa laudantium!</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </th:block>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="site-section py-sm">
+        <div class="container">
+
+            <div class="row blog-entries">
+                <div class="col-md-12 col-lg-8 main-content">
+                    <div class="row">
+                        <th:block th:each="post : ${postList}">
+                            <div class="col-md-6">
+                                <a th:href="@{/bai-viet/{id}(id=${post.postId})}" class="blog-entry element-animate"
+                                   data-animate-effect="fadeIn">
+                                    <img src="/us/images/img_5.jpg" th:src="@{${post.postImage}}"
+                                         alt="Image placeholder">
+                                    <div class="blog-content-body">
+                                        <div class="post-meta">
+                                            <span class="author mr-2">
+                                                <img th:src="@{${post.account.avatar}}"
+                                                     th:alt="${post.postTitle}">
+                                                <span
+                                                        th:text="${post.account.firstName} + ' '+${post.account.lastName}">
+
+                                                </span>
+                                            </span>&bullet;
+                                            <span class="mr-2" th:text="${post.postDate}"></span> &bullet;
+                                            <span class="ml-2"><span class="fa fa-eye"></span> <span
+                                                    th:text="${post.postViews}"></span></span>
+                                        </div>
+                                        <h2 th:text="${post.postTitle}"></h2>
+                                    </div>
+                                </a>
+                            </div>
+                        </th:block>
+
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-12 text-center">
+                            <nav aria-label="Page navigation" class="text-center">
+                                <ul class="pagination">
+                                    <li th:if="${page>1}" class="page-item">
+                                        <a class="page-link" th:href="@{/trang-chu(page=${page}-1)}">&lt;</a>
+                                    </li>
+                                    <th:block th:each="i : ${#numbers.sequence(1,totalPage)}">
+                                        <li class="page-item" th:classappend="${page==i}?active">
+                                            <a class="page-link"
+                                               th:href="@{/trang-chu(page=${i})}"
+                                               th:text="${i}">
+                                            </a>
+                                        </li>
+                                    </th:block>
+                                    <li th:if="${page<totalPage}" class="page-item">
+                                        <a class="page-link" th:href="@{/trang-chu(page=${page}+1)}">></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!--SideBar-->
+                <div th:replace="/us/fragments :: sideBar"></div>
+                <!--End SideBar-->
+
+
+            </div>
+        </div>
+    </section>
+    <!--End Content -->
+    <!--Footer-->
+    <footer th:replace="/us/fragments :: footer"></footer>
+    <!--End Footer-->
+
+</div>
+<!--Loader-->
+<div th:replace="/us/fragments :: loader"></div>
+<!--End Loader-->
+
+<script th:src="@{/us/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/us/js/jquery-migrate-3.0.0.js}"></script>
+<script>eval(mod_pagespeed_CHhG0swHu9);</script>
+<script>eval(mod_pagespeed_9gTlCHlMGs);</script>
+<script>eval(mod_pagespeed_Rk_dnvoyRW);</script>
+<script th:src="@{/us/js/owl.carousel.min.js}"></script>
+<script>eval(mod_pagespeed_5SmbetdflY);</script>
+<script>eval(mod_pagespeed_jWXnVk$Yms);</script>
+<script>eval(mod_pagespeed_c_Sou8GneL);</script>
+<script>eval(mod_pagespeed_hDB4kOERkC);</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+</script>
+<script defer th:src="@{beacon.min.js}"
+        data-cf-beacon='{"rayId":"67e76db90bc9234a","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.8.0","si":10}'></script>
+</body>
+
+</html>

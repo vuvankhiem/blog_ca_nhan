@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from preview.colorlib.com/theme/wordify/blog-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Aug 2021 04:27:23 GMT -->
+<head th:replace="/us/fragments :: head(~{::title},~{})">
+    <title th:text="${postDetail.postTitle}"></title>
+</head>
+<body>
+<div class="wrap">
+    <!--Header-->
+    <header th:replace="/us/fragments :: header"></header>
+    <!--End Header-->
+
+    <section class="site-section py-lg">
+        <div class="container">
+            <div class="row blog-entries element-animate">
+                <div class="col-md-12 col-lg-8 main-content">
+                    <img th:src="@{${postDetail.postImage}}" th:alt="${postDetail.postTitle}" class="img-fluid mb-5">
+                    <div class="post-meta">
+                        <span class="author mr-2"><img th:src="@{${postDetail.account.avatar}}"
+                                                       class="mr-2" th:text="${postDetail.account.firstName}+' '+${postDetail.account.lastName}"></span>&bullet;
+                        <span class="mr-2" th:text="${postDetail.postDate}"></span> &bullet;
+                        <span class="ml-2"><span class="fa fa-eye"></span> <span th:text="${postDetail.postViews}"></span></span>
+                    </div>
+                    <h1 class="mb-4" th:text="${postDetail.postTitle}"></h1>
+                    <a class="category mb-5" th:href="@{/danh-muc(c=${postDetail.category.categoryName})}" th:text="${postDetail.category.categoryName}"></a>
+
+                    <div class="post-content-body" th:text="${postDetail.postContent}">
+
+                    </div>
+                    <div class="pt-5">
+                        <p>Categories:
+                            <a class="category mb-5" th:href="@{/danh-muc(c=${postDetail.category.categoryName})}" th:text="${postDetail.category.categoryName}"></a>,
+                            Tags: <a href="#">#manila</a>, <a
+                                href="#">#asia</a>
+                        </p>
+                    </div>
+                    <div class="pt-5">
+                        <h3 class="mb-5">6 Comments</h3>
+                        <ul class="comment-list">
+                            <li class="comment">
+                                <div class="vcard">
+                                    <img src="/us/images/person_2.jpg" alt="Image placeholder">
+                                </div>
+                                <div class="comment-body">
+                                    <h3>Jean Doe</h3>
+                                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
+                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
+                                        sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                    <p><a href="#" class="reply rounded">Reply</a></p>
+                                </div>
+                            </li>
+                            <li class="comment">
+                                <div class="vcard">
+                                    <img src="/us/images/person_2.jpg" alt="Image placeholder">
+                                </div>
+                                <div class="comment-body">
+                                    <h3>Jean Doe</h3>
+                                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
+                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
+                                        sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                    <p><a href="#" class="reply rounded">Reply</a></p>
+                                </div>
+                                <ul class="children">
+                                    <li class="comment">
+                                        <div class="vcard">
+                                            <img src="/us/images/person_2.jpg"
+                                                 alt="Image placeholder">
+                                        </div>
+                                        <div class="comment-body">
+                                            <h3>Jean Doe</h3>
+                                            <div class="meta">January 9, 2018 at 2:21pm</div>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem
+                                                laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat
+                                                saepe enim sapiente iste iure! Quam voluptas earum impedit
+                                                necessitatibus, nihil?</p>
+                                            <p><a href="#" class="reply rounded">Reply</a></p>
+                                        </div>
+                                        <ul class="children">
+                                            <li class="comment">
+                                                <div class="vcard">
+                                                    <img src="/us/images/person_2.jpg"
+                                                         alt="Image placeholder">
+                                                </div>
+                                                <div class="comment-body">
+                                                    <h3>Jean Doe</h3>
+                                                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                        Pariatur quidem laborum necessitatibus, ipsam impedit vitae
+                                                        autem, eum officia, fugiat saepe enim sapiente iste iure! Quam
+                                                        voluptas earum impedit necessitatibus, nihil?</p>
+                                                    <p><a href="#" class="reply rounded">Reply</a></p>
+                                                </div>
+                                                <ul class="children">
+                                                    <li class="comment">
+                                                        <div class="vcard">
+                                                            <img src="/us/images/person_2.jpg"
+                                                                 alt="Image placeholder">
+                                                        </div>
+                                                        <div class="comment-body">
+                                                            <h3>Jean Doe</h3>
+                                                            <div class="meta">January 9, 2018 at 2:21pm</div>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                                Pariatur quidem laborum necessitatibus, ipsam impedit
+                                                                vitae autem, eum officia, fugiat saepe enim sapiente
+                                                                iste iure! Quam voluptas earum impedit necessitatibus,
+                                                                nihil?</p>
+                                                            <p><a href="#" class="reply rounded">Reply</a></p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="comment">
+                                <div class="vcard">
+                                    <img src="/us/images/person_2.jpg" alt="Image placeholder">
+                                </div>
+                                <div class="comment-body">
+                                    <h3>Jean Doe</h3>
+                                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
+                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
+                                        sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                    <p><a href="#" class="reply rounded">Reply</a></p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="comment-form-wrap pt-5">
+                            <h3 class="mb-5">Leave a comment</h3>
+                            <form action="#" class="p-5 bg-light">
+                                <div class="form-group">
+                                    <label for="name">Name *</label>
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="website">Website</label>
+                                    <input type="url" class="form-control" id="website">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Post Comment" class="btn btn-primary">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!--SideBar-->
+                <div th:replace="/us/fragments :: sideBar"></div>
+                <!--End SideBar-->
+
+            </div>
+        </div>
+    </section>
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="mb-3 ">Related Post</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <a href="#" class="a-block sm d-flex align-items-center height-md"
+                       style="background-image:url(/us/images/img_10.jpg)">
+                        <div class="text">
+                            <div class="post-meta">
+                                <span class="category">Lifestyle</span>
+                                <span class="mr-2">March 15, 2018 </span> &bullet;
+                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                            </div>
+                            <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <a href="#" class="a-block sm d-flex align-items-center height-md"
+                       style="background-image:url(/us/images/img_10.jpg)">
+                        <div class="text">
+                            <div class="post-meta">
+                                <span class="category">Travel</span>
+                                <span class="mr-2">March 15, 2018 </span> &bullet;
+                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                            </div>
+                            <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <a href="#" class="a-block sm d-flex align-items-center height-md"
+                       style="background-image:url(/us/images/img_10.jpg)">
+                        <div class="text">
+                            <div class="post-meta">
+                                <span class="category">Food</span>
+                                <span class="mr-2">March 15, 2018 </span> &bullet;
+                                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                            </div>
+                            <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Footer-->
+    <footer th:replace="/us/fragments :: footer"></footer>
+    <!--End Footer-->
+
+</div>
+
+<!--Loader-->
+<div th:replace="/us/fragments :: loader"></div>
+<!--End Loader-->
+<script th:src="@{/us/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/us/js/jquery-migrate-3.0.0.js}"></script>
+<script>eval(mod_pagespeed_CHhG0swHu9);</script>
+<script>eval(mod_pagespeed_9gTlCHlMGs);</script>
+<script>eval(mod_pagespeed_Rk_dnvoyRW);</script>
+<script th:src="@{/us/js/owl.carousel.min.js}"></script>
+<script>eval(mod_pagespeed_5SmbetdflY);</script>
+<script>eval(mod_pagespeed_jWXnVk$Yms);</script>
+<script>eval(mod_pagespeed_c_Sou8GneL);</script>
+<script>eval(mod_pagespeed_hDB4kOERkC);</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+</script>
+<script defer th:src="@{beacon.min.js}"
+        data-cf-beacon='{"rayId":"67e76db90bc9234a","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.8.0","si":10}'></script>
+</body>
+</html>

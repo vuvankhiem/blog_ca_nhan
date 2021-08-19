@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/us/fragments :: head(~{::title},~{})">
+    <title>Giới thiệu</title>
+</head>
+<body>
+<div class="wrap">
+    <!--Header-->
+    <header th:replace="/us/fragments :: header"></header>
+    <!--End Header-->
+
+    <section class="site-section pt-5">
+        <div class="container">
+            <div class="row blog-entries">
+                <div class="col-md-12 col-lg-8 main-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="mb-4">Xin chào! Tôi là Ly</h2>
+                            <p class="mb-5"><img src="/us/images/img_6.jpg"
+                                                 alt="Image placeholder" class="img-fluid"></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum minima eveniet recusandae
+                                suscipit eum laboriosam fugit amet deleniti iste et. Ad dolores, necessitatibus non
+                                saepe tenetur impedit commodi quibusdam natus repellat, exercitationem accusantium
+                                perferendis officiis. Laboriosam impedit quia minus pariatur!</p>
+                            <p>Dignissimos iste consectetur, nemo magnam nulla suscipit eius quibusdam, quo aperiam quia
+                                quae est explicabo nostrum ab aliquid vitae obcaecati tenetur beatae animi fugiat
+                                officia id ipsam sint? Obcaecati ea nisi fugit assumenda error totam molestiae saepe
+                                fugiat officiis quam?</p>
+                            <p>Culpa porro quod doloribus dolore sint. Distinctio facilis ullam voluptas nemo voluptatum
+                                saepe repudiandae adipisci officiis, explicabo eaque itaque sed necessitatibus, fuga, ea
+                                eius et aliquam dignissimos repellendus impedit pariatur voluptates. Dicta perferendis
+                                assumenda, nihil placeat, illum quibusdam. Vel, incidunt?</p>
+                            <p>Dolorum blanditiis illum quo quaerat, possimus praesentium perferendis! Quod autem optio
+                                nobis, placeat officiis dolorem praesentium odit. Vel, cum, a. Adipisci eligendi eaque
+                                laudantium dicta tenetur quod, pariatur sunt sed natus officia fuga accusamus
+                                reprehenderit ratione, provident possimus ut voluptatum.</p>
+                        </div>
+                    </div>
+                    <div class="row mb-5 mt-5">
+                        <div class="col-md-12 mb-5">
+                            <h2>Bài đăng gần đây</h2>
+                        </div>
+                        <div class="col-md-12">
+                            <th:block th:each="post : ${session.postLastest}">
+                                <div class="post-entry-horzontal">
+                                    <a href="blog-single.html">
+                                        <div class="image element-animate" data-animate-effect="fadeIn"
+                                             th:style="'background-image: url('+ ${post.postImage} +');'">
+
+                                        </div>
+                                        <span class="text">
+<div class="post-meta">
+<span class="author mr-2">
+    <img th:src="@{${post.account.avatar}}">
+    <span th:text="${post.account.firstName}+' '+${post.account.lastName}"></span>
+</span>&bullet;
+<span class="mr-2" th:text="${post.postDate}"> </span> &bullet;
+<span class="mr-2" th:text="${post.category.categoryName}"></span> &bullet;
+<span class="ml-2">
+    <span class="fa fa-eye"></span>
+    <span th:text="${post.postViews}"></span>
+</span>
+</div>
+<h2 th:text="${post.postTitle}"></h2>
+</span>
+                                    </a>
+                                </div>
+                            </th:block>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--SideBar-->
+                <div th:replace="/us/fragments :: sideBar"></div>
+                <!--End SideBar-->
+
+            </div>
+        </div>
+    </section>
+    <!--Footer-->
+    <footer th:replace="/us/fragments :: footer"></footer>
+    <!--End Footer-->
+
+</div>
+<!--Loader-->
+<div th:replace="/us/fragments :: loader"></div>
+<!--End Loader-->
+<script th:src="@{/us/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/us/js/jquery-migrate-3.0.0.js}"></script>
+<script>eval(mod_pagespeed_CHhG0swHu9);</script>
+<script>eval(mod_pagespeed_9gTlCHlMGs);</script>
+<script>eval(mod_pagespeed_Rk_dnvoyRW);</script>
+<script th:src="@{/us/js/owl.carousel.min.js}"></script>
+<script>eval(mod_pagespeed_5SmbetdflY);</script>
+<script>eval(mod_pagespeed_jWXnVk$Yms);</script>
+<script>eval(mod_pagespeed_c_Sou8GneL);</script>
+<script>eval(mod_pagespeed_hDB4kOERkC);</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+</script>
+<script defer th:src="@{beacon.min.js}"
+        data-cf-beacon='{"rayId":"67e76db90bc9234a","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.8.0","si":10}'></script>
+</body>
+
+<!-- Mirrored from preview.colorlib.com/theme/wordify/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Aug 2021 04:27:23 GMT -->
+</html>

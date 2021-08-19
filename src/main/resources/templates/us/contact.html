@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from preview.colorlib.com/theme/wordify/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Aug 2021 04:27:23 GMT -->
+<head th:replace="/us/fragments :: head(~{::title},~{})">
+    <title>Liên lạc với Khánh Ly</title>
+</head>
+<body>
+<div class="wrap">
+    <th:block th:if="${response}">
+        <script>
+            alert("Tin nhắn của bạn đã được gửi đến Khánh Ly. Bạn vui lòng kiểm tra email để có thể nhận được phản hồi từ Khánh Ly")
+        </script>
+    </th:block>
+    <!--Header-->
+    <header th:replace="/us/fragments :: header"></header>
+    <!--End Header-->
+
+    <section class="site-section">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h1>Contact Me</h1>
+                </div>
+            </div>
+            <div class="row blog-entries">
+                <div class="col-md-12 col-lg-8 main-content">
+                    <form th:action="@{/lien-lac}" method="POST"  th:object="${contact}">
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="name">Họ Tên</label>
+                                <input th:field="*{contactName}" type="text" id="name" class="form-control " required>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="phone">Số điện thoại</label>
+                                <input th:field="*{contactPhone}" type="text" id="phone" class="form-control " required>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="email">Email</label>
+                                <input th:field="*{contactEmail}" type="email" id="email" class="form-control " required>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="title">Tiêu đề</label>
+                                <input th:field="*{contactTitle}" type="text" id="title" class="form-control " required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="message">Nội dung tin nhắn</label>
+                                <textarea th:field="*{contactSubject}" name="message" id="message" class="form-control " cols="30"
+                                          rows="8"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <input type="submit" value="Gửi tin nhắn" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+
+                <!--SideBar-->
+                <div th:replace="/us/fragments :: sideBar"></div>
+                <!--End SideBar-->
+
+            </div>
+        </div>
+    </section>
+    <!--Footer-->
+    <footer th:replace="/us/fragments :: footer"></footer>
+    <!--End Footer-->
+
+</div>
+
+<!--Loader-->
+<div th:replace="/us/fragments :: loader"></div>
+<!--End Loader-->
+<script th:src="@{/us/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/us/js/jquery-migrate-3.0.0.js}"></script>
+<script>eval(mod_pagespeed_CHhG0swHu9);</script>
+<script>eval(mod_pagespeed_9gTlCHlMGs);</script>
+<script>eval(mod_pagespeed_Rk_dnvoyRW);</script>
+<script th:src="@{/us/js/owl.carousel.min.js}"></script>
+<script>eval(mod_pagespeed_5SmbetdflY);</script>
+<script>eval(mod_pagespeed_jWXnVk$Yms);</script>
+<script>eval(mod_pagespeed_c_Sou8GneL);</script>
+<script>eval(mod_pagespeed_hDB4kOERkC);</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+</script>
+<script defer th:src="@{beacon.min.js}"
+        data-cf-beacon='{"rayId":"67e76db90bc9234a","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.8.0","si":10}'></script>
+</body>
+
+</html>
