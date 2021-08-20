@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class HomeService implements IHomeService {
+public class HomeServiceImpl implements IHomeService {
 
     @Autowired
     private ICategoryDAO categoryDAO;

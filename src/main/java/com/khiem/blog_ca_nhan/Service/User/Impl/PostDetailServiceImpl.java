@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PostDetailService implements IPostDetailService {
+public class PostDetailServiceImpl implements IPostDetailService {
     @Autowired
     private IPostDAO postDAO;
 
