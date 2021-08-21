@@ -30,9 +30,11 @@
                     </div>
                     <div class="pt-5">
                         <p>Categories:
-                            <a class="category mb-5" th:href="@{/danh-muc(c=${postDetail.category.categoryName})}" th:text="${postDetail.category.categoryName}"></a>,
-                            Tags: <a href="#">#manila</a>, <a
-                                href="#">#asia</a>
+                            <a class="category mb-5" th:href="@{/danh-muc(c=${postDetail.category.categoryName})}" th:text="${postDetail.category.categoryName}"></a>
+                            Tags:
+                            <th:block th:each="tag : ${postDetail.tagList}">
+                                <a th:href="@{/tag(t=${tag.getTagName()})}">#<span th:text="${tag.getTagName()}"></span></a>,
+                            </th:block>
                         </p>
                     </div>
                     <div class="pt-5">

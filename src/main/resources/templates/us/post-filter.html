@@ -20,58 +20,106 @@
             <div class="row blog-entries">
                 <div class="col-md-12 col-lg-8 main-content">
                     <div class="row mb-5 mt-5">
-                        <div class="col-md-12">
-                            <th:block th:each="post : ${listP}">
-                                <div class="post-entry-horzontal">
-                                    <a th:href="@{/bai-viet/{id}(id=${post.postId})}">
-                                        <div class="image element-animate" data-animate-effect="fadeIn"
-                                             th:style="'background-image: url('+ ${post.postImage} +');'">
+                        <div class="col-md-12 text-center" >
 
+                            <th:block th:if="${listP.size()==0}">
+                                <h3 class="text-danger">Không tìm thấy bài đăng !</h3>
+                            </th:block>
+                            <th:block th:switch="${enable}">
+                                <th:block th:case="0">
+                                    <th:block th:each="post : ${listP}">
+                                        <div class="post-entry-horzontal">
+                                            <a th:href="@{/bai-viet/{id}(id=${post.postId})}">
+                                                <div class="image element-animate" data-animate-effect="fadeIn"
+                                                     th:style="'background-image: url('+ ${post.postImage} +');'">
+                                                </div>
+                                                <span class="text">
+                                            <div class="post-meta">
+                                                <span class="author mr-2">
+                                                    <img th:src="@{${post.account.avatar}}">
+                                                    <span th:text="${post.account.firstName}+' '+${post.account.lastName}"></span>
+                                                </span> &bullet;
+                                                <span class="mr-2" th:text="${post.postDate}"> </span> &bullet;
+                                                <span class="mr-2" th:text="${post.category.categoryName}"></span> &bullet;
+                                                <span class="ml-2">
+                                                    <span class="fa fa-eye"></span>
+                                                    <span th:text="${post.postViews}">
+
+                                                    </span>
+                                                </span>
+                                            </div>
+
+                                            <h2 th:text="${post.postTitle}"></h2>
+                                        </span>
+                                            </a>
                                         </div>
-                                        <span class="text">
-<div class="post-meta">
-<span class="author mr-2">
-    <img th:src="@{${post.account.avatar}}">
-    <span th:text="${post.account.firstName}+' '+${post.account.lastName}"></span>
-</span>&bullet;
-<span class="mr-2" th:text="${post.postDate}"> </span> &bullet;
-<span class="mr-2" th:text="${post.category.categoryName}"></span> &bullet;
-<span class="ml-2">
-    <span class="fa fa-eye"></span>
-    <span th:text="${post.postViews}"></span>
-</span>
-</div>
-<h2 th:text="${post.postTitle}"></h2>
-</span>
-                                    </a>
-                                </div>
+                                    </th:block>
+                                </th:block>
+                                <th:block th:case="1">
+                                    <th:block  th:each="i : ${#numbers.sequence(start,end)}">
+                                        <th:block th:if="${i<listP.size()}">
+                                            <div class="post-entry-horzontal">
+                                                <a th:href="@{/bai-viet/{id}(id=${listP.get(i).postId})}">
+                                                    <div class="image element-animate" data-animate-effect="fadeIn"
+                                                         th:style="'background-image: url('+ ${listP.get(i).postImage} +');'">
+                                                    </div>
+                                                    <span class="text">
+
+                                                <div class="post-meta">
+                                                    <span class="author mr-2">
+                                                        <img th:src="@{${listP.get(i).account.avatar}}">
+                                                        <span th:text="${listP.get(i).account.firstName}+' '+${listP.get(i).account.lastName}">
+                                                        </span>
+                                                    </span> &bullet;
+                                                    <span class="mr-2" th:text="${listP.get(i).postDate}"> </span> &bullet;
+                                                    <span class="mr-2" th:text="${listP.get(i).category.categoryName}"></span> &bullet;
+                                                    <span class="ml-2">
+                                                        <span class="fa fa-eye"></span>
+                                                        <span th:text="${listP.get(i).postViews}"></span>
+                                                    </span>
+                                                </div>
+                                                <h2 th:text="${listP.get(i).postTitle}"></h2>
+                                            </span>
+                                                </a>
+                                            </div>
+                                        </th:block>
+                                    </th:block>
+                                </th:block>
+
+
                             </th:block>
 
 
+
+
                         </div>
                     </div>
-                    <div class="row mt-5">
-                        <div class="col-md-12 text-center">
-                            <nav aria-label="Page navigation" class="text-center">
-                                <ul class="pagination">
-                                    <li th:if="${page>1}" class="page-item">
-                                        <a class="page-link" th:href="@{'/'+${filter}+'?page='+(${page}-1)+${pt}}">&lt;</a>
-                                    </li>
-                                    <th:block th:each="i : ${#numbers.sequence(1,totalPage)}">
-                                        <li class="page-item" th:classappend="${page==i}?active">
+                    <th:block th:if="${listP.size()!=0}">
+                        <div class="row mt-5">
+                            <div class="col-md-12 text-center">
+                                <nav aria-label="Page navigation" class="text-center">
+                                    <ul class="pagination">
+                                        <li th:if="${page>1}" class="page-item">
                                             <a class="page-link"
-                                               th:href="@{'/'+${filter}+'?page='+${i}+${pt}}"
-                                               th:text="${i}">
-                                            </a>
+                                               th:href="@{'/'+${filter}+'?page='+(${page}-1)+${pt}}">&lt;</a>
                                         </li>
-                                    </th:block>
-                                    <li th:if="${page<totalPage}" class="page-item">
-                                        <a class="page-link" th:href="@{'/'+${filter}+'?page='+${page+1}+${pt}}">></a>
-                                    </li>
-                                </ul>
-                            </nav>
+                                        <th:block th:each="i : ${#numbers.sequence(1,totalPage)}">
+                                            <li class="page-item" th:classappend="${page==i}?active">
+                                                <a class="page-link"
+                                                   th:href="@{'/'+${filter}+'?page='+${i}+${pt}}"
+                                                   th:text="${i}">
+                                                </a>
+                                            </li>
+                                        </th:block>
+                                        <li th:if="${page<totalPage}" class="page-item">
+                                            <a class="page-link" th:href="@{'/'+${filter}+'?page='+${page+1}+${pt}}">></a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
-                    </div>
+                    </th:block>
+
                 </div>
 
                 <!--SideBar-->

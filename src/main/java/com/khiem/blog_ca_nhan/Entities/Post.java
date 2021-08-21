@@ -5,7 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.*;
 
 @Setter
 @Getter
@@ -25,12 +25,18 @@ public class Post implements Serializable {
     private String postImage;
     private boolean postSlide;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "category_categoryID")
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "account_accountID")
     private Account account;
+
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "post_tag",
+    joinColumns = {@JoinColumn(name = "post_postID")},
+    inverseJoinColumns = {@JoinColumn(name = "tag_tagID")})
+    List<Tag> tagList = new ArrayList<>();
 
 }

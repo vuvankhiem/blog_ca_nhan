@@ -8,6 +8,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -20,4 +24,10 @@ public class Tag implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tagId;
     private String tagName;
+
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "post_tag",
+    joinColumns = {@JoinColumn(name = "tag_tagID")},
+    inverseJoinColumns = {@JoinColumn(name = "post_postID")})
+    List<Post> postList = new ArrayList<>();
 }
