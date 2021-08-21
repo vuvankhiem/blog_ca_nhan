@@ -3,6 +3,7 @@ package com.khiem.blog_ca_nhan.Service.User;
 import com.khiem.blog_ca_nhan.DTO.CategoryDTO;
 import com.khiem.blog_ca_nhan.Entities.Category;
 import com.khiem.blog_ca_nhan.Entities.Post;
+import com.khiem.blog_ca_nhan.Entities.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,7 +21,7 @@ public interface IHomeService {
 
     public List<Post> findTop4ByOrderByPostIdDesc();
 
-
+    public List<Tag> findAll();
 
     public List<CategoryDTO> findCategoryDtoList();
 

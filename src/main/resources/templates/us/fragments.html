@@ -50,9 +50,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" th:href="@{/trang-chu}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Business</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="post-filter.html" id="dropdown04"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Travel</a>
@@ -66,7 +63,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="post-filter.html" id="dropdown05"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Danh mục</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown05">
                             <th:block th:each="cate : ${session.category}">
                                 <a class="dropdown-item"
@@ -76,10 +73,13 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/gioi-thieu}">About</a>
+                        <a class="nav-link" th:href="@{/gioi-thieu}">Giới thiệu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/lien-lac}">Contact</a>
+                        <a class="nav-link" th:href="@{/lien-lac}">Liên lạc</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/gioi-thieu}">Đăng nhập</a>
                     </li>
                 </ul>
             </div>
@@ -162,18 +162,11 @@
     <div class="sidebar-box">
         <h3 class="heading">Tags</h3>
         <ul class="tags">
-            <li><a href="#">Travel</a></li>
-            <li><a href="#">Adventure</a></li>
-            <li><a href="#">Food</a></li>
-            <li><a href="#">Lifestyle</a></li>
-            <li><a href="#">Business</a></li>
-            <li><a href="#">Freelancing</a></li>
-            <li><a href="#">Travel</a></li>
-            <li><a href="#">Adventure</a></li>
-            <li><a href="#">Food</a></li>
-            <li><a href="#">Lifestyle</a></li>
-            <li><a href="#">Business</a></li>
-            <li><a href="#">Freelancing</a></li>
+            <th:block th:each="t : ${session.tagList}">
+                <li><a th:href="@{/tag(t=${t.tagName})}" th:text="${t.tagName}"></a></li>
+            </th:block>
+
+
         </ul>
     </div>
 </div>

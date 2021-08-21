@@ -3,9 +3,11 @@ package com.khiem.blog_ca_nhan.Service.User.Impl;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.khiem.blog_ca_nhan.DAO.ICategoryDAO;
 import com.khiem.blog_ca_nhan.DAO.IPostDAO;
+import com.khiem.blog_ca_nhan.DAO.ITagDAO;
 import com.khiem.blog_ca_nhan.DTO.CategoryDTO;
 import com.khiem.blog_ca_nhan.Entities.Category;
 import com.khiem.blog_ca_nhan.Entities.Post;
+import com.khiem.blog_ca_nhan.Entities.Tag;
 import com.khiem.blog_ca_nhan.Service.User.IHomeService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class HomeServiceImpl implements IHomeService {
 
     @Autowired
     private IPostDAO postDAO;
+
+    @Autowired
+    private ITagDAO tagDAO;
 
     @Override
     public List<Category> findAllCategories() {
@@ -50,7 +55,10 @@ public class HomeServiceImpl implements IHomeService {
         return postDAO.findTop4ByOrderByPostIdDesc();
     }
 
-
+    @Override
+    public List<Tag> findAll() {
+        return tagDAO.findAll();
+    }
 
 
     @Override

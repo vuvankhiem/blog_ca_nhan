@@ -21,7 +21,7 @@ import java.util.Set;
 public class BlogCaNhanApplication implements CommandLineRunner{
 
     @Autowired
-    IPostDAO postDAO;
+    ITagDAO tagDAO;
 
     public static void main(String[] args) {
         SpringApplication.run(BlogCaNhanApplication.class, args);
@@ -30,10 +30,10 @@ public class BlogCaNhanApplication implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-        Post post = postDAO.findByPostId(1);
-        for (Tag tag: post.getTagList()
+        List<Tag> list = tagDAO.findAll();
+        for (Tag t: list
              ) {
-            System.out.println(tag.getTagName());
+            System.out.println(t.getTagName());
         }
 
 

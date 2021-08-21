@@ -750,7 +750,6 @@ a.btn.disabled, fieldset:disabled a.btn {
     top: 100%;
     left: 0;
     z-index: 1000;
-    display: none;
     float: left;
     min-width: 10rem;
     padding: .5rem 0;
@@ -762,7 +761,11 @@ a.btn.disabled, fieldset:disabled a.btn {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .15);
-    border-radius: .25rem
+    border-radius: .25rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.4s;
+    transform: translateY(-1rem);
 }
 
 .dropdown-menu-right {
@@ -885,13 +888,13 @@ a.btn.disabled, fieldset:disabled a.btn {
 .dropdown-item:hover, .dropdown-item:focus {
     color: #16181b;
     text-decoration: none;
-    background-color: #f8f9fa
+    background-color: #dc3545;
 }
 
 .dropdown-item.active, .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #6610f2
+    background-color: #dc3545;
 }
 
 .dropdown-item.disabled, .dropdown-item:disabled {
@@ -900,7 +903,10 @@ a.btn.disabled, fieldset:disabled a.btn {
 }
 
 .dropdown-menu.show {
-    display: block
+    opacity: 1;
+    visibility: visible;
+    transition: 0.3s;
+    transform: translateY(0);
 }
 
 .nav {
@@ -9347,7 +9353,7 @@ header .navbar .dropdown-menu a {
 
 .top-bar .social a {
     color: #fff;
-    opacity: .5;
+    opacity: 1;
     padding: 5px
 }
 
@@ -9432,12 +9438,14 @@ header .navbar .dropdown-menu a {
 }
 
 .a-block .text.half-to-full {
-    max-width: 50%
+    max-width: 50%;
+    margin-left: 50px;
 }
 
 @media (max-width: 767.98px) {
     .a-block .text.half-to-full {
-        max-width: 100%
+        max-width: 100%;
+        margin-left: 7px;
     }
 }
 
@@ -9710,7 +9718,7 @@ textarea.form-control {
 }
 
 .sidebar-box {
-    margin-bottom: 4em;
+    margin-bottom: 2.5em;
     font-size: 15px;
     width: 100%;
     float: left;

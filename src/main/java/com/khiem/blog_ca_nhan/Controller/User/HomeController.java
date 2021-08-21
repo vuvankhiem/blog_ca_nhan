@@ -33,13 +33,14 @@ public class HomeController {
         Pageable pageable = PageRequest.of(p - 1, 8);
         Page<Post> page = homeService.findByOrderByPostIdDesc(pageable);
         model.addAttribute("postList", page.getContent());
-        session.setAttribute("postPopular", homeService.findTop3ByOrderByPostViewsDesc());
-        session.setAttribute("postLastest", homeService.findTop4ByOrderByPostIdDesc());
         model.addAttribute("postSile", homeService.findByPostSlide());
         model.addAttribute("totalPage", page.getTotalPages());
         model.addAttribute("page", p);
+        session.setAttribute("postPopular", homeService.findTop3ByOrderByPostViewsDesc());
+        session.setAttribute("postLastest", homeService.findTop4ByOrderByPostIdDesc());
         session.setAttribute("categoryDTO", homeService.findCategoryDtoList());
         session.setAttribute("category", homeService.findAllCategories());
+        session.setAttribute("tagList",homeService.findAll());
 
         return "us/index";
     }
