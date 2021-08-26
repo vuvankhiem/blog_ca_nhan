@@ -50,7 +50,7 @@ public class RestFB {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER");
         authorityList.add(authority);
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getId()+user.getName(),"", true,true,true,true,authorityList);
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getEmail(),"", true,true,true,true,authorityList);
         return userDetails;
     }
 

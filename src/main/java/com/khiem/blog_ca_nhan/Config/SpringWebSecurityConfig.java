@@ -36,7 +36,7 @@ public class SpringWebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/binh-luan","admin/**").authenticated()
+                    .antMatchers("/binh-luan").authenticated()
                     .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                     .anyRequest().permitAll()
                 .and()

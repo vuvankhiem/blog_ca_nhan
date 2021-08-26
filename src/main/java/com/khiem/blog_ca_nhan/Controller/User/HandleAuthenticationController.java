@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.security.Principal;
 
 @Controller
 public class HandleAuthenticationController {
@@ -40,6 +41,7 @@ public class HandleAuthenticationController {
         return "us/sign-in";
     }
 
+    //Login with facebook account
     @RequestMapping("/dang-nhap-facebook")
     public String dangNhap_FB(HttpServletRequest request,@RequestParam(name = "code",required = false) String code) throws IOException {
 
@@ -59,9 +61,11 @@ public class HandleAuthenticationController {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null, userDetails.getAuthorities());
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        return "redirect:trang-chu";
+        return "redirect:login-success";
 
     }
+
+    //login with google account
     @RequestMapping("/dang-nhap-google")
     public String dangNhapGoogle(@RequestParam(required = false) String code) throws IOException {
 
@@ -72,19 +76,27 @@ public class HandleAuthenticationController {
         System.out.println(accessToken);
         GooglePojo googlePojo = restGG.getUserInfo(accessToken);
         String email = googlePojo.getEmail();
-        System.out.println(email+"\t"+googlePojo.getName()+"\n"+googlePojo.getId()+"\t"+"\t"+googlePojo.getPicture());
+        String auth_provider = "GOOGLE";
+        Account account = authenticationService.findByEmailAndAuth_Provider(email,auth_provider);
+        if(account==null){
+            authenticationService.saveAccount(email,googlePojo.getPicture(),auth_provider,googlePojo.getName());
+        }
         UserDetails userDetails = restGG.userDetails(googlePojo);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        return "redirect:trang-chu";
+        return "redirect:login-success";
     }
+
+
     @GetMapping("/dang-ki")
     public String dangKi(){
+
         return "us/sign-up";
     }
 
     @GetMapping("/login-success")
-    public String loginSuccess(){
+    public String loginSuccess(Principal principal){
+        System.out.println(principal.getName());
         return "redirect:trang-chu";
     }
 }
