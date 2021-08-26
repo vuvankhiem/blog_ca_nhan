@@ -29,38 +29,45 @@
                     <div class="signin-image">
                         <figure><img th:src="@{/us/images/signin-image.jpg}" alt="sing up image"></figure>
                         <div>
-                            <a href="#" class="signup-image-link">Create an account</a>
+                            <a th:href="@{/dang-ki}" class="signup-image-link">Create an account</a>
                             <a href="#" class="signup-image-link">Forgot password</a>
+                            <a th:href="@{/trang-chu}" class="signup-image-link">Back to Home page</a>
                         </div>
                     </div>
 
 
                     <div class="signin-form">
                         <h2 class="form-title">Sign in</h2>
-                        <form method="POST" class="register-form" id="login-form">
+                        <form method="POST" class="register-form" id="login-form" th:action="@{/login}">
                             <div class="form-group">
                                 <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="your_name" id="your_name" placeholder="Username or Email"/>
+                                <input type="text" name="username" id="your_name" placeholder="Username or Email"/>
                             </div>
                             <div class="form-group">
                                 <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="your_pass" id="your_pass" placeholder="Password"/>
+                                <input type="password" name="password" id="your_pass" placeholder="Password"/>
                             </div>
                             <div class="form-group">
                                 <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
                                 <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
                             </div>
+                            <div class="form-group" th:if="${err}" th:text="${err}" style="color: #e72734;">
+
+                            </div>
                             <div class="form-group form-button">
-                                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                                <input type="submit" id="signin" class="form-submit" value="Log in"/>
                             </div>
                         </form>
                         <div class="social-login">
                             <span class="social-label">Or login with</span>
                             <ul class="socials">
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="https://www.facebook.com/dialog/oauth?client_id=811895242831147&redirect_uri=https://localhost:8085/dang-nhap-facebook"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
                                 <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                                <li><a href="https://accounts.google.com/o/oauth2/auth?scope=profile email&redirect_uri=https://localhost:8085/dang-nhap-google&response_type=code
+                            &client_id=237825192235-hrsf4f3ahuk43lc51gd12m8u37dloebr.apps.googleusercontent.com&approval_prompt=force"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
                             </ul>
+
+
                         </div>
                     </div>
                 </div>

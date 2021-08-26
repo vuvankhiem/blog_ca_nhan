@@ -26,8 +26,8 @@ public class Account implements Serializable {
     private String avatar;
     private boolean active;
     private String role;
-    private String firstName;
-    private String lastName;
+    private String fullName;
+    private String auth_provider;
 
 
 

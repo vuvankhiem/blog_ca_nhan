@@ -1,7 +1,9 @@
 package com.khiem.blog_ca_nhan;
 
+import com.khiem.blog_ca_nhan.DAO.IAccountDAO;
 import com.khiem.blog_ca_nhan.DAO.IPostDAO;
 import com.khiem.blog_ca_nhan.DAO.ITagDAO;
+import com.khiem.blog_ca_nhan.Entities.Account;
 import com.khiem.blog_ca_nhan.Entities.Post;
 import com.khiem.blog_ca_nhan.Entities.Tag;
 import com.zaxxer.hikari.HikariDataSource;
@@ -21,21 +23,21 @@ import java.util.Set;
 public class BlogCaNhanApplication implements CommandLineRunner{
 
     @Autowired
-    ITagDAO tagDAO;
+    IAccountDAO accountDAO;
 
     public static void main(String[] args) {
         SpringApplication.run(BlogCaNhanApplication.class, args);
     }
 
-
     @Override
     public void run(String... args) throws Exception {
-        List<Tag> list = tagDAO.findAll();
-        for (Tag t: list
-             ) {
-            System.out.println(t.getTagName());
+        String email = "khiemvu09@gmail.com";
+        String auth = "GOOGLE";
+        Account account = accountDAO.findByEmailAndAuth_provider(email,auth);
+        if(account==null){
+            System.out.println("-> Khong co");
+        }else {
+            System.out.println("-> Co");
         }
-
-
     }
 }

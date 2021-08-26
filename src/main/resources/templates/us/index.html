@@ -32,7 +32,7 @@
                                         <div class="post-meta">
                                             <span class="author mr-2"><img th:src="@{${postSile.account.avatar}}"
                                                                            alt="Colorlib">
-                                                <span th:text="${postSile.account.firstName} + ' '+${postSile.account.lastName}"></span>
+                                                <span th:text="${postSile.account.fullName}"></span>
                                             </span>&bullet;
                                             <span class="mr-2" th:text="${postSile.postDate}"></span> &bullet;
                                             <span class="ml-2">
@@ -73,7 +73,7 @@
                                                 <img th:src="@{${post.account.avatar}}"
                                                      th:alt="${post.postTitle}">
                                                 <span
-                                                        th:text="${post.account.firstName} + ' '+${post.account.lastName}">
+                                                        th:text="${post.account.fullName}">
 
                                                 </span>
                                             </span>&bullet;
@@ -152,8 +152,6 @@
 
     gtag('config', 'UA-23581568-13');
 </script>
-<script defer th:src="@{beacon.min.js}"
-        data-cf-beacon='{"rayId":"67e76db90bc9234a","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.8.0","si":10}'></script>
 </body>
 
 </html>
