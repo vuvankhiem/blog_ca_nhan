@@ -32,7 +32,7 @@ public class HandleAuthenticationController {
     @Autowired
     private IHandleAuthenticationService authenticationService;
 
-
+    //sign in page
     @GetMapping("/dang-nhap")
     public String dangNhap(@RequestParam(required = false) String err, Model model){
         if(err!=null){
@@ -88,12 +88,15 @@ public class HandleAuthenticationController {
     }
 
 
+    //sign up
     @GetMapping("/dang-ki")
     public String dangKi(){
 
         return "us/sign-up";
     }
 
+
+    //login successful
     @GetMapping("/login-success")
     public String loginSuccess(Principal principal){
         System.out.println(principal.getName());
