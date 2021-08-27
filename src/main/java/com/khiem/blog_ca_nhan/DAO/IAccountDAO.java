@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IAccountDAO extends JpaRepository<Account,Integer> {
-    @Query("select a from Account a where a.email=:us or a.username=:us")
-    public Account findByEmailOrUsername(@Param("us") String user_mail);
+    @Query("select a from Account a where a.username=:us or a.email=:mail")
+    public Account findByEmailOrUsername(@Param("us") String user,@Param("mail") String email);
 
     @Query("select a from Account  a where  a.email=?1 and a.auth_provider=?2")
     public Account findByEmailAndAuth_provider(String email,String auth_provider);

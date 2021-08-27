@@ -31,13 +31,6 @@ public class BlogCaNhanApplication implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-        String email = "khiemvu09@gmail.com";
-        String auth = "GOOGLE";
-        Account account = accountDAO.findByEmailAndAuth_provider(email,auth);
-        if(account==null){
-            System.out.println("-> Khong co");
-        }else {
-            System.out.println("-> Co");
-        }
+
     }
 }

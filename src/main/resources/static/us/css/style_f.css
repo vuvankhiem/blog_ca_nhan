@@ -9,6 +9,31 @@ list-type-ulli, .socials {
   margin: 0;
   padding: 0; }
 
+/*Custom CSS*/
+.sign-in-close{
+  height: 67px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.close-box{
+  height: 100%;
+  width: 67px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#close-link{
+  font-size: 25px;
+  color: black;
+  transition: 0.3s;
+}
+#close-link:hover{
+  font-size: 35px;
+  color: crimson;
+  transition: 0.4s;
+}
+/*End Custom CSS*/
 
 a:focus, a:active {
   text-decoration: none;
@@ -341,10 +366,9 @@ label.valid {
   -ms-transform: translateY(0); }
 
 .material-icons-name {
-  font-size: 18px; }
+  font-size: 15px; }
 
 .signin-content {
-  padding-top: 67px;
   padding-bottom: 87px; }
 
 .social-login {

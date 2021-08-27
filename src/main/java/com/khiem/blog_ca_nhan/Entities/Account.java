@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 
@@ -24,8 +26,8 @@ public class Account implements Serializable {
     private String password;
     private String email;
     private String avatar;
-    private boolean active;
-    private String role;
+    private boolean active = true;
+    private String role = "USER";
     private String fullName;
     private String auth_provider;
 

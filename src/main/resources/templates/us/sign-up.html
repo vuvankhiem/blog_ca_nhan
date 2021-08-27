@@ -18,43 +18,52 @@
         *{
             font-family: 'Poppins', sans-serif;
         }
+
     </style>
 </head>
 <body>
 <div class="main">
     <!-- Sing in  Form -->
     <section class="signup">
-        <div class="container" style="margin: 55px auto;">
+        <div class="container">
             <div class="signup-content">
                 <div class="signup-form">
-                    <h2 class="form-title">Sign up</h2>
-                    <form method="POST" class="register-form" id="register-form">
+                    <h2 class="form-title" style="text-align: center;">Sign up</h2>
+                    <form method="POST" class="register-form" id="register-form" th:action="@{/dang-ki}" th:object="${account}">
                         <div class="form-group">
-                            <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input type="text" name="name" id="name" placeholder="Your Name"/>
+                            <label for="name"><i style="font-size: 19px;" class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input th:field="*{fullName}" type="text"  id="name" placeholder="Your Name"/>
                         </div>
                         <div class="form-group">
-                            <label for="email"><i class="zmdi zmdi-email"></i></label>
-                            <input type="email" name="email" id="email" placeholder="Your Email"/>
+                            <label for="username"><i class="zmdi zmdi-account-circle material-icons-name"></i></label>
+                            <input th:field="*{username}" type="text" id="username" placeholder="Username"/>
                         </div>
                         <div class="form-group">
-                            <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                            <input type="password" name="pass" id="pass" placeholder="Password"/>
+                            <label for="email"><i class="zmdi zmdi-email material-icons-name"></i></label>
+                            <input th:field="*{email}" type="email" id="email" placeholder="Your Email"/>
                         </div>
                         <div class="form-group">
-                            <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                            <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                            <label for="pass"><i class="zmdi zmdi-lock material-icons-name"></i></label>
+                            <input th:field="*{password}" type="password" id="pass" placeholder="Password"/>
                         </div>
                         <div class="form-group">
+                            <label for="re-pass"><i class="zmdi zmdi-lock-outline material-icons-name"></i></label>
+                            <input th:field="*{re_password}" type="password"  id="re_pass" placeholder="Repeat your password"/>
                         </div>
-                        <div class="form-group form-button">
+                        <div class="form-group">
+                            <span th:if="${#fields.hasAnyErrors()}">
+                                <span th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+                            </span>
+                            <span th:text="${err}"></span>
+                        </div>
+                        <div class="form-group form-button" style="text-align: center;">
                             <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
                         </div>
                     </form>
                 </div>
                 <div class="signup-image">
                     <figure><img src="us/images/signup-image.jpg" alt="sing up image"></figure>
-                    <a th:href="@{/trang-chu}" class="signup-image-link">Back to Home page</a>
+                    <a th:href="@{/dang-nhap}" class="signup-image-link">You have an account</a>
                 </div>
             </div>
         </div>

@@ -16,15 +16,13 @@ public class HandleAuthenticationService implements IHandleAuthenticationService
     }
 
     @Override
-    public void saveAccount(String email, String picture, String auth_provider, String name) {
-        Account account = new Account();
-        account.setActive(true);
-        account.setFullName(name);
-        account.setRole("USER");
-        account.setEmail(email);
-        account.setAvatar(picture);
-        account.setAuth_provider(auth_provider);
-        account.setUsername(name);
+    public void saveAccount(Account account) {
+
         accountDAO.save(account);
+    }
+
+    @Override
+    public Account findByEmailOrUsername(String username,String email) {
+        return accountDAO.findByEmailOrUsername(username,email);
     }
 }
