@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PostDetailController {
@@ -16,10 +17,15 @@ public class PostDetailController {
 
     @RequestMapping("/bai-viet/{id}")
     public String postDetail(Model model,
-                             @PathVariable int id){
+                             @PathVariable int id,
+                             @RequestParam(required = false,defaultValue = "0") int up_view){
         Post post = postDetailService.findByPostID(id);
         model.addAttribute("postDetail",post);
-        postDetailService.updatePostView(post);
+        model.addAttribute("list_cmt",postDetailService.findCommentsByPostId(id));
+        model.addAttribute("list_reply",postDetailService.findReplysByPostId(id));
+        if(up_view==1){
+            postDetailService.updatePostView(post);
+        }
         return "us/blog-single";
     }
 }

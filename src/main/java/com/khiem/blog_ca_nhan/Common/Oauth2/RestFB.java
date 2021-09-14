@@ -3,6 +3,7 @@ package com.khiem.blog_ca_nhan.Common.Oauth2;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.khiem.blog_ca_nhan.Entities.Account;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
@@ -46,11 +47,11 @@ public class RestFB {
     }
 
 
-    public UserDetails userDetails(User user){
+    public UserDetails userDetails(Account account){
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER");
+        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+account.getRole());
         authorityList.add(authority);
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getEmail(),"", true,true,true,true,authorityList);
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(account.getUsername(), "", true,true,true,true,authorityList);
         return userDetails;
     }
 

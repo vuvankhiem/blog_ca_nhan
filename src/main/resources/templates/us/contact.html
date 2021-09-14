@@ -7,11 +7,7 @@
 </head>
 <body>
 <div class="wrap">
-    <th:block th:if="${response}" >
-        <script>
-            alert("Tin nhắn của bạn đã được gửi đến Khánh Ly. Bạn vui lòng kiểm tra email để có thể nhận được phản hồi từ Khánh Ly")
-        </script>
-    </th:block>
+
     <!--Header-->
     <header th:replace="/us/fragments :: header"></header>
     <!--End Header-->
@@ -25,7 +21,7 @@
             </div>
             <div class="row blog-entries">
                 <div class="col-md-12 col-lg-8 main-content">
-                    <form th:action="@{/lien-lac}" method="POST"  th:object="${contact}">
+                    <form th:action="@{/lien-lac}" method="POST" th:object="${contact}" onsubmit="noti()">
                         <div class="row">
                             <div class="col-md-12 form-group">
                                 <label for="name">Họ Tên</label>
@@ -37,7 +33,8 @@
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="email">Email</label>
-                                <input th:field="*{contactEmail}" type="email" id="email" class="form-control " required>
+                                <input th:field="*{contactEmail}" type="email" id="email" class="form-control "
+                                       required>
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="title">Tiêu đề</label>
@@ -47,16 +44,25 @@
                         <div class="row">
                             <div class="col-md-12 form-group">
                                 <label for="message">Nội dung tin nhắn</label>
-                                <textarea th:field="*{contactSubject}" name="message" id="message" class="form-control " cols="30"
+                                <textarea th:field="*{contactSubject}" name="message" id="message" class="form-control "
+                                          cols="30"
                                           rows="8"></textarea>
                             </div>
                         </div>
+                        <div style="width: 100%;text-align: center; margin: 0 0 15px;">
+                            <span th:if="${#fields.hasAnyErrors()}">
+                                <th:block th:each="err : ${#fields.allErrors()}">
+                                    <span class="err" th:text="${err}"></span><br>
+                                </th:block>
+                            </span>
+                        </div>
                         <div class="row">
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-12 form-group text-center">
                                 <input type="submit" value="Gửi tin nhắn" class="btn btn-primary">
                             </div>
                         </div>
                     </form>
+
 
                 </div>
 
@@ -89,7 +95,11 @@
 <script>eval(mod_pagespeed_hDB4kOERkC);</script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+
 <script>
+    function noti() {
+        alert("Tin nhắn của bạn đã được gửi đến Khánh Ly. Bạn vui lòng kiểm tra email để có thể nhận được phản hồi từ Khánh Ly")
+    }
     window.dataLayer = window.dataLayer || [];
 
     function gtag() {

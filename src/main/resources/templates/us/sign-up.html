@@ -18,6 +18,9 @@
         *{
             font-family: 'Poppins', sans-serif;
         }
+        .err{
+            color: #dc3545;
+        }
 
     </style>
 </head>
@@ -26,35 +29,43 @@
     <!-- Sing in  Form -->
     <section class="signup">
         <div class="container">
+            <div style="height: 67px; width: 100%;" class="sign-in-close">
+                    <span class="close-box">
+                        <a onclick="back_page()" id="close-link"><i class="zmdi zmdi-close"></i></a>
+                    </span>
+            </div>
             <div class="signup-content">
                 <div class="signup-form">
                     <h2 class="form-title" style="text-align: center;">Sign up</h2>
                     <form method="POST" class="register-form" id="register-form" th:action="@{/dang-ki}" th:object="${account}">
                         <div class="form-group">
                             <label for="name"><i style="font-size: 19px;" class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input th:field="*{fullName}" type="text"  id="name" placeholder="Your Name"/>
+                            <input th:field="*{fullName}" type="text"  id="name" placeholder="Full Name" required minlength="3" maxlength="30" pattern="^[a-zA-Z \u0080-\u9fff]*$" title="Nhập họ tên không hợp lệ"/>
                         </div>
                         <div class="form-group">
                             <label for="username"><i class="zmdi zmdi-account-circle material-icons-name"></i></label>
-                            <input th:field="*{username}" type="text" id="username" placeholder="Username"/>
+                            <input th:field="*{username}" type="text" id="username" placeholder="Username" required minlength="3" maxlength="45" pattern="^[a-zA-Z0-9]*$" title="Username không có kí tự đặc biệt (kể cả khoảng trắng)"/>
                         </div>
                         <div class="form-group">
                             <label for="email"><i class="zmdi zmdi-email material-icons-name"></i></label>
-                            <input th:field="*{email}" type="email" id="email" placeholder="Your Email"/>
+                            <input th:field="*{email}" type="email" id="email" placeholder="Your Email" required/>
                         </div>
                         <div class="form-group">
                             <label for="pass"><i class="zmdi zmdi-lock material-icons-name"></i></label>
-                            <input th:field="*{password}" type="password" id="pass" placeholder="Password"/>
+                            <input th:field="*{password}" type="password" id="pass" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" title="Mật khẩu tối thiểu tám ký tự, ít nhất một chữ hoa, một chữ thường và một chữ số" required/>
                         </div>
                         <div class="form-group">
                             <label for="re-pass"><i class="zmdi zmdi-lock-outline material-icons-name"></i></label>
-                            <input th:field="*{re_password}" type="password"  id="re_pass" placeholder="Repeat your password"/>
+                            <input th:field="*{re_password}" type="password"  id="re_pass" placeholder="Repeat your password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" title="Mật khẩu tối thiểu tám ký tự, ít nhất một chữ hoa, một chữ thường và một chữ số" required/>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="text-align: center;">
                             <span th:if="${#fields.hasAnyErrors()}">
-                                <span th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+                                <th:block th:each="err : ${#fields.allErrors()}">
+                                    <span class="err" th:text="${err}"></span><br>
+                                </th:block>
+
                             </span>
-                            <span th:text="${err}"></span>
+                            <span class="err" th:text="${err}"></span>
                         </div>
                         <div class="form-group form-button" style="text-align: center;">
                             <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
@@ -72,5 +83,6 @@
 </div>
 <!-- JS -->
 <script th:src="@{/us/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/us/js/main.js}"></script>
 </body>
 </html>

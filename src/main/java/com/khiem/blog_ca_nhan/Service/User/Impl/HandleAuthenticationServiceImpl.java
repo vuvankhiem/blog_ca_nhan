@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HandleAuthenticationService implements IHandleAuthenticationService {
+public class HandleAuthenticationServiceImpl implements IHandleAuthenticationService {
     @Autowired
     private IAccountDAO accountDAO;
     @Override
@@ -22,7 +22,18 @@ public class HandleAuthenticationService implements IHandleAuthenticationService
     }
 
     @Override
-    public Account findByEmailOrUsername(String username,String email) {
-        return accountDAO.findByEmailOrUsername(username,email);
+    public Account findByUsernameOrEmail(String username, String email) {
+        return accountDAO.findTopByUsernameOrEmail(username,email);
+    }
+
+
+    @Override
+    public Account findByEmail(String email) {
+        return accountDAO.findByEmail(email);
+    }
+
+    @Override
+    public Account findByUsername(String username) {
+        return accountDAO.findByUsername(username);
     }
 }

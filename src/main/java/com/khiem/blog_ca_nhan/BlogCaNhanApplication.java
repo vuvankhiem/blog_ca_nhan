@@ -1,9 +1,11 @@
 package com.khiem.blog_ca_nhan;
 
 import com.khiem.blog_ca_nhan.DAO.IAccountDAO;
+import com.khiem.blog_ca_nhan.DAO.ICommentDAO;
 import com.khiem.blog_ca_nhan.DAO.IPostDAO;
 import com.khiem.blog_ca_nhan.DAO.ITagDAO;
 import com.khiem.blog_ca_nhan.Entities.Account;
+import com.khiem.blog_ca_nhan.Entities.Comment;
 import com.khiem.blog_ca_nhan.Entities.Post;
 import com.khiem.blog_ca_nhan.Entities.Tag;
 import com.zaxxer.hikari.HikariDataSource;
@@ -24,6 +26,8 @@ public class BlogCaNhanApplication implements CommandLineRunner{
 
     @Autowired
     IAccountDAO accountDAO;
+    @Autowired
+    ICommentDAO commentDAO;
 
     public static void main(String[] args) {
         SpringApplication.run(BlogCaNhanApplication.class, args);

@@ -8,9 +8,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IAccountDAO extends JpaRepository<Account,Integer> {
-    @Query("select a from Account a where a.username=:us or a.email=:mail")
-    public Account findByEmailOrUsername(@Param("us") String user,@Param("mail") String email);
+
+    public Account findTopByUsernameOrEmail(String username,String email);
 
     @Query("select a from Account  a where  a.email=?1 and a.auth_provider=?2")
     public Account findByEmailAndAuth_provider(String email,String auth_provider);
+
+    public Account findByEmail(String email);
+
+    public Account findByUsername(String username);
 }

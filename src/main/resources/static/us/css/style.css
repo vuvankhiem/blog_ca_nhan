@@ -59,7 +59,113 @@
     --font-family-sans-serif: "Josefin Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-monospace: "Inconsolata", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
 }
+/*Custom Css*/
 
+.err{
+    color: #dc3545;
+}
+.commentBox {
+
+    height: 40px;
+    border-radius: 30px;
+    width: 280px;
+    background-color: #f2f2f2;
+    display: flex;
+
+}
+
+
+
+.commentButton {
+    color: white;
+    float: right;
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    font-size: initial;
+    border: none;
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.commentInput {
+    border: none;
+    background-color: #f2f2f2;
+    outline: none;
+    float: left;
+    padding: 5px 15px;
+    color: black;
+    font-size: 13px;
+    transition: 0.4s;
+    line-height: 30px;
+    width: 240px;
+    border-radius: 30px;
+
+
+}
+.commentButton:hover{
+    background-color: white;
+    color: #1da0f2;
+}
+
+.p-5-avatar{
+    height: 50px;
+    border-radius: 50%;
+}
+.p-5-commentBox{
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    border-radius: 30px;
+    border: 1px solid #d0d0d0;
+    width: 100%;
+    padding: 0 15px;
+}
+.p-5-commentBox input{
+    border: none;
+    outline: none;
+    font-size: 15px;
+    width: 90%;
+    padding-left: 12px;
+
+}
+.p-5-commentBox #post{
+    width: 10%;
+    margin: 0;
+    text-align: center;
+    color: #1da0f2;
+    cursor: pointer;
+}
+.rep span{
+    background: #ececec;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+@media screen and (max-width: 620px) {
+    .commentBox{
+        width: 240px;
+
+    }
+    .commentInput{
+        width: 200px;
+    }
+    .p-5-commentBox input{
+        width: 85%;
+        padding-right: 10px;
+    }
+    .p-5-commentBox #post{
+
+    }
+}
+/**/
 *, *::before, *::after {
     -webkit-box-sizing: border-box;
     box-sizing: border-box
@@ -111,7 +217,7 @@ h1, h2, h3, h4 {
 
 p {
     margin-top: 0;
-    margin-bottom: 1rem
+    margin-bottom: 10px;
 }
 
 ul {
@@ -9503,7 +9609,7 @@ header .navbar .dropdown-menu a {
 }
 
 .site-section {
-    padding: 7em 0
+    padding: 3em 0;
 }
 
 .site-section.py-sm {
@@ -9708,12 +9814,13 @@ textarea.form-control {
 }
 
 .sidebar {
-    padding-left: 5em
+    padding-left: 5em;
 }
 
 @media (max-width: 991.98px) {
     .sidebar {
-        padding-left: 15px
+        padding-left: 15px;
+        margin-top: 20px;
     }
 }
 
@@ -9861,15 +9968,15 @@ textarea.form-control {
 }
 
 .comment-list .children {
-    padding: 50px 0 0 40px;
-    margin: 0;
+    margin-top: 15px;
     float: left;
-    width: 100%
+    width: 100%;
+    padding: 0;
 }
 
 .comment-list li {
     padding: 0;
-    margin: 0 0 30px 0;
+    margin: 0 0 25px 0;
     float: left;
     width: 100%;
     clear: both;

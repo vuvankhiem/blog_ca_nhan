@@ -1,5 +1,6 @@
 package com.khiem.blog_ca_nhan.Controller.User;
 
+import com.khiem.blog_ca_nhan.Common.Base.Base;
 import com.khiem.blog_ca_nhan.Common.Oauth2.GooglePojo;
 import com.khiem.blog_ca_nhan.Common.Oauth2.RestFB;
 import com.khiem.blog_ca_nhan.Common.Oauth2.RestGG;
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +30,7 @@ import java.io.IOException;
 import java.security.Principal;
 
 @Controller
-public class HandleAuthenticationController {
+public class HandleAuthenticationController extends Base {
     static String st_password;
     static String st_username;
     static String st_code = "";
@@ -62,27 +64,38 @@ public class HandleAuthenticationController {
 
     //Login with facebook account
     @RequestMapping("/dang-nhap-facebook")
-    public String dangNhap_FB(HttpServletRequest request, @RequestParam(name = "code", required = false) String code) throws IOException {
+    public String dangNhap_FB(HttpServletRequest request,
+                              @RequestParam(name = "code", required = false) String code,
+                              Model model) throws IOException {
 
-        if (code == null || code.isEmpty()) {
+        if (st_code.equals(code)) {
             return "redirect:dang-nhap";
         }
+        st_code = code;
         String accessToken = restFB.getToken(code);
         User user = restFB.getUserInfo(accessToken);
         String email = user.getEmail();
         String auth_provider = "FACEBOOK";
-        Account acc = authenticationService.findByEmailAndAuth_Provider(email, auth_provider);
+        String username = "";
+        Account acc = authenticationService.findByEmailAndAuth_Provider(email,auth_provider);
         if (acc == null) {
+            username = super.randomCode(9);
             Account account = new Account();
             String picture = "https://graph.facebook.com/v3.0/" + user.getId() + "/picture?type=large";
-            account.setUsername(user.getName());
+            account.setUsername(username);
             account.setAuth_provider(auth_provider);
             account.setEmail(email);
             account.setFullName(user.getName());
             account.setAvatar(picture);
             authenticationService.saveAccount(account);
+        }else {
+            username = acc.getUsername();
+            if(!acc.isActive()){
+                model.addAttribute("err","Tài khoản của bạn tạm thời bị khóa !");
+                return "us/sign-in";
+            }
         }
-        UserDetails userDetails = restFB.userDetails(user);
+        UserDetails userDetails = restFB.userDetails(acc);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
@@ -92,27 +105,36 @@ public class HandleAuthenticationController {
 
     //login with google account
     @RequestMapping("/dang-nhap-google")
-    public String dangNhapGoogle(@RequestParam(required = false) String code) throws IOException {
+    public String dangNhapGoogle(@RequestParam(required = false) String code,
+                                 Model model) throws IOException {
 
-        if (code == null || code.isEmpty()) {
+        if (st_code.equals(code)) {
             return "redirect:dang-nhap";
         }
+        st_code = code;
         String accessToken = restGG.getToken(code);
-        System.out.println(accessToken);
         GooglePojo googlePojo = restGG.getUserInfo(accessToken);
         String email = googlePojo.getEmail();
         String auth_provider = "GOOGLE";
-        Account acc = authenticationService.findByEmailAndAuth_Provider(email, auth_provider);
+        String username = "";
+        Account acc = authenticationService.findByEmailAndAuth_Provider(email,auth_provider);
         if (acc == null) {
+            username = super.randomCode(9);
             Account account = new Account();
             account.setEmail(email);
             account.setAvatar(googlePojo.getPicture());
             account.setAuth_provider(auth_provider);
             account.setFullName(googlePojo.getName());
-            account.setUsername(googlePojo.getName());
+            account.setUsername(username);
             authenticationService.saveAccount(account);
+        }else {
+            username = acc.getUsername();
+            if(!acc.isActive()){
+                model.addAttribute("err","Tài khoản của bạn tạm thời bị khóa !");
+                return "us/sign-in";
+            }
         }
-        UserDetails userDetails = restGG.userDetails(googlePojo);
+        UserDetails userDetails = restGG.userDetails(acc);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         return "redirect:login-success";
@@ -121,7 +143,7 @@ public class HandleAuthenticationController {
 
     //sign up
     @GetMapping("/dang-ki")
-    public String dangKi_page(@ModelAttribute(name = "account") AccountDTO account,
+    public String dangKi_saveAccount(@ModelAttribute(name = "account") AccountDTO account,
                               @RequestParam(required = false, defaultValue = "null") String code) {
         Account acc = new Account();
         if (code.equals(st_code)) {
@@ -145,10 +167,10 @@ public class HandleAuthenticationController {
         if (bindingResult.hasErrors()) {
             return "us/sign-up";
         } else {
-            Account acc = authenticationService.findByEmailOrUsername(account.getUsername(), account.getEmail());
+            Account acc = authenticationService.findByUsernameOrEmail(account.getUsername(), account.getEmail());
             if (acc == null) {
                 if (account.getPassword().equals(account.getRe_password())) {
-                    st_code = RandomStringUtils.randomAlphanumeric(6);
+                    st_code = super.randomCode(6);
                     st_email = account.getEmail();
                     st_fullname = account.getFullName();
                     st_password = passwordEncoder.encode(account.getPassword());
@@ -178,8 +200,9 @@ public class HandleAuthenticationController {
     //login successful
     @GetMapping("/login-success")
     public String loginSuccess(Principal principal, HttpSession session) {
-        String mail = principal.getName();
-        Account account = authenticationService.findByEmailOrUsername(mail,mail);
+        String username = principal.getName();
+        System.out.println(username);
+        Account account = authenticationService.findByUsername(username);
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setAvatar(account.getAvatar());
         accountDTO.setUsername(account.getUsername());
@@ -190,4 +213,6 @@ public class HandleAuthenticationController {
         }
         return "redirect:trang-chu";
     }
+
+
 }

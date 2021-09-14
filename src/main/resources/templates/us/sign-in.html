@@ -27,7 +27,7 @@
             <div class="container">
                 <div style="height: 67px; width: 100%;" class="sign-in-close">
                     <span class="close-box">
-                        <a th:href="@{/trang-chu}" id="close-link"><i class="zmdi zmdi-close"></i></a>
+                        <a onclick="back_page()" id="close-link"><i class="zmdi zmdi-close"></i></a>
                     </span>
                 </div>
                 <div class="signin-content">
@@ -56,7 +56,7 @@
                                 <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
                                 <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
                             </div>
-                            <div class="form-group" th:if="${err}" th:text="${err}" style="color: #e72734;">
+                            <div class="form-group" th:if="${err}" th:text="${err}" style="color: #dc3545;">
 
                             </div>
                             <div class="form-group form-button">
@@ -81,6 +81,7 @@
         <!--End Sing in  Form -->
     </div>
     <!-- JS -->
+    <script th:src="@{/us/js/main.js}"></script>
     <script th:src="@{/us/js/jquery-3.2.1.min.js}"></script>
 </body>
 </html>

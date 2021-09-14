@@ -3,6 +3,8 @@ package com.khiem.blog_ca_nhan.Common.Oauth2;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.khiem.blog_ca_nhan.Entities.Account;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
@@ -47,11 +49,11 @@ public class RestGG {
         return googlePojo;
     }
 
-    public UserDetails userDetails(GooglePojo googlePojo){
+    public UserDetails userDetails(Account account){
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER");
+        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+account.getRole());
         authorityList.add(authority);
-        UserDetails userDetails = new User(googlePojo.getEmail(), "",true,true,true,true,authorityList);
+        UserDetails userDetails = new User(account.getUsername(), "",true,true,true,true,authorityList);
         return userDetails;
     }
 }

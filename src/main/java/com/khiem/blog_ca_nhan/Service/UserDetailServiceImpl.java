@@ -19,7 +19,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private IAccountDAO accountDAO;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accountDAO.findByEmailOrUsername(username,username);
+        Account account = accountDAO.findTopByUsernameOrEmail(username,username);
         if(account!=null){
             List<GrantedAuthority> authorityList = new ArrayList<>();
             GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+account.getRole());

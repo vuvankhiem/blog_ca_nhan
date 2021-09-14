@@ -5,10 +5,13 @@ import com.khiem.blog_ca_nhan.Service.User.IContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 @Controller
 public class ContactController {
@@ -23,10 +26,15 @@ public class ContactController {
     }
 
     @PostMapping("/lien-lac")
-    public String themlienlac(@ModelAttribute("contact") Contact contact,Model model){
-        model.addAttribute("response","resp");
+    public String themlienlac(@Valid @ModelAttribute("contact") Contact contact,
+                              BindingResult bindingResult,
+                              Model model){
+        if(bindingResult.hasErrors()){
+            return "us/contact";
+        }
+
         contactService.saveContact(contact);
-        return "us/contact";
+        return "redirect:trang-chu";
     }
 
 }

@@ -8,7 +8,7 @@
 
 <body>
 
-<div class="wrap">
+<div class="wrap" >
 
     <!--Header-->
     <header th:replace="/us/fragments :: header"></header>
@@ -24,9 +24,9 @@
                         <th:block th:each="postSile : ${postSile}">
                             <div>
                                 <a th:href="@{/bai-viet/{id}(id=${postSile.postId})}"
-                                   class="a-block d-flex align-items-center height-lg" style=""
+                                   class="click a-block d-flex align-items-center height-lg" style=""
                                    th:style="'background-image: url('+ ${postSile.postImage} +');'">
-
+                                    <input th:value="${postSile.postId}" type="hidden" class="hiden">
                                     <div class="text half-to-full">
                                         <span class="category mb-5" th:text="${postSile.category.categoryName}"></span>
                                         <div class="post-meta">
@@ -63,8 +63,9 @@
                     <div class="row">
                         <th:block th:each="post : ${postList}">
                             <div class="col-md-6">
-                                <a th:href="@{/bai-viet/{id}(id=${post.postId})}" class="blog-entry element-animate"
+                                <a th:href="@{/bai-viet/{id}(id=${post.postId})}" class="click blog-entry element-animate"
                                    data-animate-effect="fadeIn">
+                                    <input th:value="${post.postId}" type="hidden" class="hiden">
                                     <img src="/us/images/img_5.jpg" th:src="@{${post.postImage}}"
                                          alt="Image placeholder">
                                     <div class="blog-content-body">
@@ -128,7 +129,7 @@
 <!--Loader-->
 <div th:replace="/us/fragments :: loader"></div>
 <!--End Loader-->
-
+<script th:src="@{/us/js/main.js}"></script>
 <script th:src="@{/us/js/jquery-3.2.1.min.js}"></script>
 <script th:src="@{/us/js/jquery-migrate-3.0.0.js}"></script>
 <script>eval(mod_pagespeed_CHhG0swHu9);</script>

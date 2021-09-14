@@ -10,6 +10,7 @@ list-type-ulli, .socials {
   padding: 0; }
 
 /*Custom CSS*/
+
 .sign-in-close{
   height: 67px;
   width: 100%;
@@ -26,11 +27,13 @@ list-type-ulli, .socials {
 #close-link{
   font-size: 25px;
   color: black;
+  cursor: pointer;
   transition: 0.3s;
 }
 #close-link:hover{
   font-size: 35px;
   color: crimson;
+  cursor: pointer;
   transition: 0.4s;
 }
 /*End Custom CSS*/
@@ -171,7 +174,7 @@ body {
 }
 
 .signup-content {
-  padding: 75px 0; }
+  padding-bottom: 65px; }
 
 .signup-form, .signup-image, .signin-form, .signin-image {
   width: 50%;
@@ -202,7 +205,6 @@ figure {
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
   -ms-border-radius: 5px;
-  margin-top: 25px;
   cursor: pointer; }
   .form-submit:hover {
     background: #4292dc; }
